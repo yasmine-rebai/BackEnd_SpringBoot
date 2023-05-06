@@ -1,23 +1,22 @@
 package com.example.candida.candidature.Entity;
 
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.*;
+import java.io.File;
 import java.io.Serializable;
+
 
 @Entity
 @Setter
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-
+@Table
 public class Candidature implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,9 +31,14 @@ public class Candidature implements Serializable {
     private String lastname;
     private String email;
     private String mobile;
-    private String cv;
+    @Column(nullable = true, length = 64)
 
-    @OneToOne
-    Entretien entretien ;
+    private String cv;
+    @OneToOne(mappedBy = "candidate", cascade = CascadeType.REMOVE)
+    private Entretien entretien;
+
+
+
+
 }
 

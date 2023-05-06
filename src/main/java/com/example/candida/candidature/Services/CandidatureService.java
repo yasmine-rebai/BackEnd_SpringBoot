@@ -27,13 +27,13 @@ public class CandidatureService implements ICandidatureService
 
 
     @Override
-    public List<Candidature> findAll() {
+    public  List<Candidature> retrieveAll() {
         return (List<Candidature>) candidatureRepository.findAll();
     }
 
     @Override
-    public Candidature save(Candidature candidature) {
-       return candidatureRepository.save(candidature);
+    public long save(Candidature candidature) {
+       return candidatureRepository.save(candidature).getIdCondidate();
     }
     @Override
     public void  supprimerCandidate(long id) {
@@ -62,17 +62,12 @@ public class CandidatureService implements ICandidatureService
         return  candidatureRepository.findById(id).orElse(null);
     }
 
+
+
     @Override
-    public Candidature assignCandidToEntretien(long idCondidate, long idEntretien){
+    public void generatePdf(String toString) {
 
-        Entretien e=entretienService.findById(idEntretien);
-        Candidature c=findById(idCondidate);
-        c.setEntretien(e);
-        entretienService.save(e);
-        candidatureRepository.save(c);
-        return c;
     }
-
 
 
 }

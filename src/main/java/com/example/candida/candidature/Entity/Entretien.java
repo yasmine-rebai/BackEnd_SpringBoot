@@ -1,6 +1,7 @@
 package com.example.candida.candidature.Entity;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
 import javax.persistence.*;
@@ -21,5 +22,8 @@ public class Entretien implements Serializable {
     private Date date;
     private String lieu;
     private String description;
+    @OneToOne
+    @JsonIgnoreProperties("entretien")
+    private Candidature candidate;
 
 }
